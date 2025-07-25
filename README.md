@@ -1,66 +1,51 @@
-## Foundry
+## StdAssertionsAtLine
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+### prints the line number where a forge assert fails
 
-Foundry consists of:
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+We've always wanted and needed this. This simple script preprocesses test files so that any failing assert will have the line number printed in error logs.
 
-## Documentation
+### usage
 
-https://book.getfoundry.sh/
+Install via `forge install georgercarder/StdAssertionsAtLine`
 
-## Usage
+Import to forge test and just put empty string as first parameter
 
-### Build
+```
+import {Test, console} from "forge-std/Test.sol"
+import {StdAssertionsAtLine} from "lib/StdAssertionsAtLine/src/StdAssertionsAtLine.sol";
 
-```shell
-$ forge build
+// ...
+
+contract ExampleTest is Test {
+        StdAssertionsAtLine atLine = new StdAssertionsAtLine();
+
+
+        // ...
+
+        function test_exampleTest() public {
+
+            // ...
+
+            atLine.assertEq("", thingA, thingB); 
+        }
+
+}
+
 ```
 
-### Test
+Then be sure that this is ran, preferably in some form of test run script  
 
-```shell
-$ forge test
+```
+./stdassert_at_line_preprocess.sh <TEST_FILEPATH> 
 ```
 
-### Format
 
-```shell
-$ forge fmt
-```
+Enjoy!
 
-### Gas Snapshots
 
-```shell
-$ forge snapshot
-```
+Not audited. Use at your own risk.
 
-### Anvil
+Support my work on this library by donating ETH or other coins to
 
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+`0x1331DA733F329F7918e38Bc13148832D146e5adE`
