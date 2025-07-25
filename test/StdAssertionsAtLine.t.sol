@@ -13,6 +13,6 @@ contract StdAssertAtLineTest is Test {
     function test_bool() public {
         atLine.assertEq("line:14", uint256(2), uint256(4 / 2));
 
-        atLine.assertEq("line:16", true, false);
+        //atLine.assertEq("line:16", true, false); // uncomment this to see example line number in logs
     }
 }
