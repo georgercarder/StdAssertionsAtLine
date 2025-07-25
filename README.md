@@ -34,7 +34,7 @@ contract ExampleTest is Test {
 
 ```
 
-Then be sure that this is ran, preferably in some form of test run script  
+Then be sure that this is ran if test file is refreshed, preferably in some form of test run script  
 
 ```
 ./stdassert_at_line_preprocess.sh <TEST_FILEPATH> 
